@@ -432,7 +432,24 @@
                 </div>
             </div>
         </div>
-
+        <div class="row align-items-center border">
+            <div class="form-group col-md-3">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" readonly="readonly"></input>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="CreatorUserId" class="control-label"></label>
+                <input asp-for="CreatorUserId" class="form-control" readonly="readonly"></input>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="UpdateDate" class="control-label"></label>
+                <input asp-for="UpdateDate" class="form-control" readonly="readonly"></input>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="UpdaterUserId" class="control-label"></label>
+                <input asp-for="UpdaterUserId" class="form-control" readonly="readonly"></input>
+            </div>
+        </div>
         <div class="form-group">
             <input type="submit" value="Save" class="btn btn-default" />
         </div>
