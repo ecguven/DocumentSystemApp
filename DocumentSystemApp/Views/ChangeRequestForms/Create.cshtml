@@ -1,0 +1,449 @@
+﻿@model DocumentSystemApp.Data.Entities.ChangeRequestForm
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>ChangeRequestForm</h4>
+<hr />
+
+<div class="container">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row align-items-start border">
+            <div class="form-group col-md-12">
+                <label asp-for="CompanyId" class="control-label"></label>
+                <input asp-for="CompanyId" class="form-control" />
+                <span asp-validation-for="CompanyId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row align-items-md-center border">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="SPRS" class="control-label"></label>
+                    <input asp-for="SPRS" class="form-control" />
+                    <span asp-validation-for="SPRS" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Version" class="control-label"></label>
+                    <input asp-for="Version" class="form-control" />
+                    <span asp-validation-for="Version" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="ChangeRequestID" class="control-label"></label>
+                    <input asp-for="ChangeRequestID" class="form-control" />
+                    <span asp-validation-for="ChangeRequestID" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-md-center border">
+            <div class="form-group col-md-12">
+                <label asp-for="ChangeRequestDescrpition" class="control-label"></label>
+                <textarea asp-for="ChangeRequestDescrpition" class="form-control"></textarea>
+                <span asp-validation-for="ChangeRequestDescrpition" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row align-items-md-center border">
+            <div class="form-group col-md-12">
+                <label asp-for="ChangeReason" class="control-label"></label>
+                <textarea asp-for="ChangeReason" class="form-control"></textarea>
+                <span asp-validation-for="ChangeReason" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row align-items-md-center border">
+            <div class="form-group col-md-3">
+                <label>Priority</label>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="PriorityEmergency" /> @Html.DisplayNameFor(model => model.PriorityEmergency)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="PriorityRoutine" /> @Html.DisplayNameFor(model => model.PriorityRoutine)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="PriorityNextVersion" /> @Html.DisplayNameFor(model => model.PriorityNextVersion)
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-md-center border">
+            <div class="form-group col-md-6">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="ReferenceNumber" class="control-label"></label>
+                <input asp-for="ReferenceNumber" class="form-control" />
+                <span asp-validation-for="ReferenceNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row align-items-md-center border">
+            <div class="form-group col-md-6">
+                <label asp-for="InitiatedBy" class="control-label"></label>
+                <input asp-for="InitiatedBy" class="form-control" />
+                <span asp-validation-for="InitiatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="SignatureDate" class="control-label"></label>
+                <input asp-for="SignatureDate" class="form-control" />
+                <span asp-validation-for="SignatureDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row align-items-md-center border">
+            <div class="form-group col-md-2">
+                <label>Configuration:</label>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ConfigurationHardware" /> @Html.DisplayNameFor(model => model.ConfigurationHardware)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ConfigurationSoftware" /> @Html.DisplayNameFor(model => model.ConfigurationSoftware)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ConfigurationSystemDocumentation" /> @Html.DisplayNameFor(model => model.ConfigurationSystemDocumentation)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ConfigurationUserTraining" /> @Html.DisplayNameFor(model => model.ConfigurationUserTraining)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ConfigurationFirmware" /> @Html.DisplayNameFor(model => model.ConfigurationFirmware)
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center border">
+            <div class="form-group col-md-2">
+                <label>Change Type 1</label>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ChangeType1NewRequirement" /> @Html.DisplayNameFor(model => model.ChangeType1NewRequirement)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ChangeType1RequirementChange" /> @Html.DisplayNameFor(model => model.ChangeType1RequirementChange)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ChangeType1DesignChange" /> @Html.DisplayNameFor(model => model.ChangeType1DesignChange)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ChangeType1Other" /> @Html.DisplayNameFor(model => model.ChangeType1Other)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ChangeType1BugFixing" /> @Html.DisplayNameFor(model => model.ChangeType1BugFixing)
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row align-items-center border">
+            <div class="form-group col-md-2">
+                <label>Change Type 2</label>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ChangeType2Commercial" /> @Html.DisplayNameFor(model => model.ChangeType2Commercial)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ChangeType2Investment" /> @Html.DisplayNameFor(model => model.ChangeType2Investment)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <input asp-for="ChangeType2Text" class="form-control" />
+                <span asp-validation-for="ChangeType2Text" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row align-items-center border">
+            <div class="form-group col-md-2">
+                <label>Impact Assessment:</label>
+            </div>
+            <div class="form-group col-md-5">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="bImpactAssessmentToA" /> @Html.DisplayNameFor(model => model.bImpactAssessmentToA)
+                    </label>
+                </div>
+                <textarea asp-for="ImpactAssessmentToA" class="form-control"></textarea>
+                <span asp-validation-for="ImpactAssessmentToA" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-5">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="bImpactAssessmentMA" /> @Html.DisplayNameFor(model => model.bImpactAssessmentMA)
+                    </label>
+                </div>
+                <textarea asp-for="ImpactAssessmentMA" class="form-control"></textarea>
+                <span asp-validation-for="ImpactAssessmentMA" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row align-items-center border">
+            <div class="form-group col-md-4">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="bImpactAssessmentDC" /> @Html.DisplayNameFor(model => model.bImpactAssessmentDC)
+                    </label>
+                </div>
+                <textarea asp-for="ImpactAssessmentDC" class="form-control"></textarea>
+                <span asp-validation-for="ImpactAssessmentDC" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-4">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="bImpactAssessmentTtE" /> @Html.DisplayNameFor(model => model.bImpactAssessmentTtE)
+                    </label>
+                </div>
+                <textarea asp-for="ImpactAssessmentTtE" class="form-control"></textarea>
+                <span asp-validation-for="ImpactAssessmentTtE" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-md-4">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="bImpactAssessmentOth" /> @Html.DisplayNameFor(model => model.bImpactAssessmentOth)
+                    </label>
+                </div>
+                <textarea asp-for="ImpactAssessmentOth" class="form-control"></textarea>
+                <span asp-validation-for="ImpactAssessmentOth" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="row align-items-center border">
+            <div class="form-group col-md-2">
+                <label>Configuration:</label>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ChangeAccept" /> @Html.DisplayNameFor(model => model.ChangeAccept)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ChangeReject" /> @Html.DisplayNameFor(model => model.ChangeReject)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-1">
+                <label asp-for="ChangeJustification" class="control-label"></label>
+            </div>
+            <div class="form-group col-md-5">
+                <input asp-for="ChangeJustification" class="form-control" />
+                <span asp-validation-for="ChangeJustification" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row align-items-end">
+            <div class="card col-md-12">
+                <div class="card-header ">
+                    Change Realization Approvals
+                </div>
+                <div class="card-block">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>Print Name</th>
+                                <th>Signature / Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input asp-for="CHARole1" class="form-control" />
+                                    <span asp-validation-for="CHARole1" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="CHAPrintName1" class="form-control" />
+                                    <span asp-validation-for="CHAPrintName1" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="CHASignatureDate1" class="form-control" />
+                                    <span asp-validation-for="CHASignatureDate1" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input asp-for="CHARole2" class="form-control" />
+                                    <span asp-validation-for="CHARole2" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="CHAPrintName2" class="form-control" />
+                                    <span asp-validation-for="CHAPrintName2" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="CHASignatureDate2" class="form-control" />
+                                    <span asp-validation-for="CHASignatureDate2" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input asp-for="CHARole3" class="form-control" />
+                                    <span asp-validation-for="CHARole3" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="CHAPrintName3" class="form-control" />
+                                    <span asp-validation-for="CHAPrintName3" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="CHASignatureDate3" class="form-control" />
+                                    <span asp-validation-for="CHASignatureDate3" class="text-danger"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center border">
+            <div class="form-group col-md-12">
+                <label asp-for="SummaryofResults" class="control-label"></label>
+                <textarea asp-for="SummaryofResults" class="form-control"></textarea>
+                <span asp-validation-for="SummaryofResults" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row align-items-center border">
+            <div class="form-group col-md-12">
+                <label asp-for="Attachments" class="control-label"></label>
+                <textarea asp-for="Attachments" class="form-control"></textarea>
+                <span asp-validation-for="Attachments" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row align-items-end border">
+            <div class="card col-md-12">
+                <div class="card-header ">
+                    Final Approvals
+                </div>
+                <div class="card-block">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>Print Name</th>
+                                <th>Signature / Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input asp-for="FARole1" class="form-control" />
+                                    <span asp-validation-for="FARole1" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="FAPrintName1" class="form-control" />
+                                    <span asp-validation-for="FAPrintName1" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="FASignatureDate1" class="form-control" />
+                                    <span asp-validation-for="FASignatureDate1" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input asp-for="FARole2" class="form-control" />
+                                    <span asp-validation-for="FARole2" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="FAPrintName2" class="form-control" />
+                                    <span asp-validation-for="FAPrintName2" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="FASignatureDate2" class="form-control" />
+                                    <span asp-validation-for="FASignatureDate2" class="text-danger"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input asp-for="FARole3" class="form-control" />
+                                    <span asp-validation-for="FARole3" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="FAPrintName3" class="form-control" />
+                                    <span asp-validation-for="FAPrintName3" class="text-danger"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="FASignatureDate3" class="form-control" />
+                                    <span asp-validation-for="FASignatureDate3" class="text-danger"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>    
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+</form>
+
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
