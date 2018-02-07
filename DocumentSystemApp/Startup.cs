@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using DocumentSystemApp.Data;
 using DocumentSystemApp.Models;
 using DocumentSystemApp.Services;
+using DocumentSystemApp.Repositories;
 
 namespace DocumentSystemApp
 {
@@ -32,6 +33,8 @@ namespace DocumentSystemApp
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<DocumentSystemDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddTransient<IChangeRequestFormRepository, ChangeRequestFormRepository>();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();

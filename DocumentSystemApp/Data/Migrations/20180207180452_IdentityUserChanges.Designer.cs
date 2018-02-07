@@ -11,9 +11,10 @@ using System;
 namespace DocumentSystemApp.Data.Migrations
 {
     [DbContext(typeof(DocumentSystemDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180207180452_IdentityUserChanges")]
+    partial class IdentityUserChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

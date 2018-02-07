@@ -61,7 +61,9 @@ namespace DocumentSystemApp.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
+                StatusMessage = StatusMessage,
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
 
             return View(model);
@@ -102,6 +104,22 @@ namespace DocumentSystemApp.Controllers
                 }
             }
 
+            var firstName = user.FirstName;
+            if (model.FirstName != firstName)
+            {
+                user.FirstName = model.FirstName;
+            }
+            var lastName = user.LastName;
+            if (model.LastName != lastName)
+            {
+                user.LastName = model.LastName;
+            }
+            var updUser = await _userManager.UpdateAsync(user);
+            if (!updUser.Succeeded)
+            {
+                throw new ApplicationException($"Unexpected error occurred setting for user with ID '{user.Id}'.");
+            }
+            
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }

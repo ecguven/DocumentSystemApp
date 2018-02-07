@@ -21,5 +21,7 @@ namespace DocumentSystemApp.Models.ManageViewModels
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

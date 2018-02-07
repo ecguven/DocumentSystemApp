@@ -9,6 +9,8 @@ using DocumentSystemApp.Data;
 using DocumentSystemApp.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using DocumentSystemApp.Models;
+using DocumentSystemApp.Models.ChangeRequestFormViewModels;
+using DocumentSystemApp.Repositories;
 
 namespace DocumentSystemApp.Controllers
 {
@@ -16,17 +18,22 @@ namespace DocumentSystemApp.Controllers
     {
         private readonly DocumentSystemDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IChangeRequestFormRepository _changeRequestFormRepository;
 
-        public ChangeRequestFormsController(DocumentSystemDbContext context, UserManager<ApplicationUser> userManager)
+        public ChangeRequestFormsController(DocumentSystemDbContext context, 
+            UserManager<ApplicationUser> userManager,
+            IChangeRequestFormRepository changeRequestFormRepository)
         {
             _context = context;
             _userManager = userManager;
+            _changeRequestFormRepository = changeRequestFormRepository;
         }
 
         // GET: ChangeRequestForms
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ChangeRequestForms.ToListAsync());
+            var model = _changeRequestFormRepository.ChangeRequestFormLists();
+            return View(model);
         }
 
         // GET: ChangeRequestForms/Details/5
