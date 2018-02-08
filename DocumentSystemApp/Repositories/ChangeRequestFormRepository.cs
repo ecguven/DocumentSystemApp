@@ -1,4 +1,6 @@
-﻿using DocumentSystemApp.Data;
+﻿using AutoMapper;
+using DocumentSystemApp.Data;
+using DocumentSystemApp.Data.Entities;
 using DocumentSystemApp.Models.ChangeRequestFormViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,11 +12,13 @@ namespace DocumentSystemApp.Repositories
     public class ChangeRequestFormRepository : IChangeRequestFormRepository
     {
         private readonly DocumentSystemDbContext _appDbContext;
+        private readonly IMapper _mapper;
 
 
-        public ChangeRequestFormRepository(DocumentSystemDbContext appDbContext)
+        public ChangeRequestFormRepository(DocumentSystemDbContext appDbContext, IMapper mapper)
         {
             _appDbContext = appDbContext;
+            _mapper = mapper;
         }
 
         public IEnumerable<RequestFormListViewModel> ChangeRequestFormLists()
@@ -32,6 +36,18 @@ namespace DocumentSystemApp.Repositories
             });
 
             return result;
+        }
+
+        public RequestFormCreateEditViewModel GetById(int id)
+        {
+            var changeForm = _appDbContext.ChangeRequestForms.FirstOrDefault(x => x.ChangeRequestFormId == id);
+            if (changeForm != null)
+            {
+                var model = _mapper.Map<ChangeRequestForm, RequestFormCreateEditViewModel>(changeForm);
+                return model;
+            }
+
+            return null;
         }
 
 

@@ -9,5 +9,6 @@ namespace DocumentSystemApp.Repositories
     public interface IChangeRequestFormRepository
     {
         IEnumerable<RequestFormListViewModel> ChangeRequestFormLists();
+        RequestFormCreateEditViewModel GetById(int id);
     }
 }

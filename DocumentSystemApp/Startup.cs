@@ -12,6 +12,7 @@ using DocumentSystemApp.Data;
 using DocumentSystemApp.Models;
 using DocumentSystemApp.Services;
 using DocumentSystemApp.Repositories;
+using AutoMapper;
 
 namespace DocumentSystemApp
 {
@@ -40,6 +41,7 @@ namespace DocumentSystemApp
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

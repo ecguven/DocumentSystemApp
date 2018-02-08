@@ -44,8 +44,10 @@ namespace DocumentSystemApp.Controllers
                 return NotFound();
             }
 
-            var changeRequestForm = await _context.ChangeRequestForms
-                .SingleOrDefaultAsync(m => m.ChangeRequestFormId == id);
+            var changeRequestForm = _changeRequestFormRepository.GetById(id.Value);
+
+            //var changeRequestForm = await _context.ChangeRequestForms
+            //    .SingleOrDefaultAsync(m => m.ChangeRequestFormId == id);
             if (changeRequestForm == null)
             {
                 return NotFound();
