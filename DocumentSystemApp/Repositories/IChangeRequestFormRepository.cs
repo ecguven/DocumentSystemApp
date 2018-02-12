@@ -1,4 +1,5 @@
-﻿using DocumentSystemApp.Models.ChangeRequestFormViewModels;
+﻿using DocumentSystemApp.Data.Entities;
+using DocumentSystemApp.Models.ChangeRequestFormViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace DocumentSystemApp.Repositories
     public interface IChangeRequestFormRepository
     {
         IEnumerable<RequestFormListViewModel> ChangeRequestFormLists();
-        RequestFormCreateEditViewModel GetById(int id);
+        ChangeRequestForm GetById(int id);
+        void Create(ChangeRequestForm requestFormModel);
+        void Update(ChangeRequestForm requestFormModel);
     }
 }

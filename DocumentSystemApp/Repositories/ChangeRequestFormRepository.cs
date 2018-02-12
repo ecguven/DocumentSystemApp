@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DocumentSystemApp.Data;
+﻿using DocumentSystemApp.Data;
 using DocumentSystemApp.Data.Entities;
 using DocumentSystemApp.Models.ChangeRequestFormViewModels;
 using System;
@@ -12,13 +11,10 @@ namespace DocumentSystemApp.Repositories
     public class ChangeRequestFormRepository : IChangeRequestFormRepository
     {
         private readonly DocumentSystemDbContext _appDbContext;
-        private readonly IMapper _mapper;
 
-
-        public ChangeRequestFormRepository(DocumentSystemDbContext appDbContext, IMapper mapper)
+        public ChangeRequestFormRepository(DocumentSystemDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-            _mapper = mapper;
         }
 
         public IEnumerable<RequestFormListViewModel> ChangeRequestFormLists()
@@ -38,17 +34,42 @@ namespace DocumentSystemApp.Repositories
             return result;
         }
 
-        public RequestFormCreateEditViewModel GetById(int id)
+        public ChangeRequestForm GetById(int id)
         {
             var changeForm = _appDbContext.ChangeRequestForms.FirstOrDefault(x => x.ChangeRequestFormId == id);
-            if (changeForm != null)
+            return changeForm;
+        }
+
+        public void Create(ChangeRequestForm requestFormModel)
+        {
+            try
             {
-                var model = _mapper.Map<ChangeRequestForm, RequestFormCreateEditViewModel>(changeForm);
-                return model;
+                
+                _appDbContext.Add(requestFormModel);
+                _appDbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
 
-            return null;
         }
+        public void Update(ChangeRequestForm requestFormModel)
+        {
+            try
+            {
+                _appDbContext.Update(requestFormModel);
+                _appDbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
 
 
     }

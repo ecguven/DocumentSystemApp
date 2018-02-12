@@ -9,13 +9,19 @@ namespace DocumentSystemApp.Models.ChangeRequestFormViewModels
 {
     public class RequestFormCreateEditViewModel
     {
-        public int ChangeRequestFormId { get; set; }
+        public int? ChangeRequestFormId { get; set; }
         #region Initial
         public int CompanyId { get; set; }
+
+        [Required]
         [DisplayName("System/Product/Service")]
         public string SPRS { get; set; }
+
+        [Required]
         [DisplayName("Version")]
         public string Version { get; set; }
+
+        [Required]
         [DisplayName("Change Request ID #:")]
         public string ChangeRequestID { get; set; }
         [DisplayName("Description of Change Requested: ")]

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using DocumentSystemApp.Models;
 using DocumentSystemApp.Models.ChangeRequestFormViewModels;
 using DocumentSystemApp.Repositories;
+using AutoMapper;
 
 namespace DocumentSystemApp.Controllers
 {
@@ -19,14 +20,17 @@ namespace DocumentSystemApp.Controllers
         private readonly DocumentSystemDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IChangeRequestFormRepository _changeRequestFormRepository;
+        private readonly IMapper _mapper;
 
         public ChangeRequestFormsController(DocumentSystemDbContext context, 
             UserManager<ApplicationUser> userManager,
-            IChangeRequestFormRepository changeRequestFormRepository)
+            IChangeRequestFormRepository changeRequestFormRepository,
+            IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
             _changeRequestFormRepository = changeRequestFormRepository;
+            _mapper = mapper;
         }
 
         // GET: ChangeRequestForms
@@ -45,15 +49,16 @@ namespace DocumentSystemApp.Controllers
             }
 
             var changeRequestForm = _changeRequestFormRepository.GetById(id.Value);
-
+            
             //var changeRequestForm = await _context.ChangeRequestForms
             //    .SingleOrDefaultAsync(m => m.ChangeRequestFormId == id);
             if (changeRequestForm == null)
             {
                 return NotFound();
             }
+            var model = _mapper.Map<ChangeRequestForm, RequestFormCreateEditViewModel>(changeRequestForm);
 
-            return View(changeRequestForm);
+            return View(model);
         }
 
         // GET: ChangeRequestForms/Create
@@ -67,18 +72,23 @@ namespace DocumentSystemApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ChangeRequestFormId,CompanyId,SPRS,Version,ChangeRequestID,ChangeRequestDescrpition,ChangeReason,PriorityEmergency,PriorityRoutine,PriorityNextVersion,Date,ReferenceNumber,InitiatedBy,SignatureDate,ConfigurationHardware,ConfigurationSoftware,ConfigurationSystemDocumentation,ConfigurationUserTraining,ConfigurationFirmware,ChangeType1NewRequirement,ChangeType1RequirementChange,ChangeType1DesignChange,ChangeType1Other,ChangeType1BugFixing,ChangeType2Commercial,ChangeType2Investment,ChangeType2Text,bImpactAssessmentToA,ImpactAssessmentToA,bImpactAssessmentMA,ImpactAssessmentMA,bImpactAssessmentDC,ImpactAssessmentDC,bImpactAssessmentTtE,ImpactAssessmentTtE,bImpactAssessmentOth,ImpactAssessmentOth,ChangeAccept,ChangeReject,ChangeJustification,CHARole1,CHAPrintName1,CHASignatureDate1,CHARole2,CHAPrintName2,CHASignatureDate2,CHARole3,CHAPrintName3,CHASignatureDate3,SummaryofResults,Attachments,FARole1,FAPrintName1,FASignatureDate1,FARole2,FAPrintName2,FASignatureDate2,FARole3,FAPrintName3,FASignatureDate3,CreateDate,CreatorUserId,UpdateDate,UpdaterUserId")] ChangeRequestForm changeRequestForm)
+        public async Task<IActionResult> Create(RequestFormCreateEditViewModel requestFormCreateEditViewModel)
         {
+            if (requestFormCreateEditViewModel.ChangeRequestFormId != null)
+            {
+                requestFormCreateEditViewModel.ChangeRequestFormId = null;
+            }
+
             if (ModelState.IsValid)
             {
                 var userID = _userManager.GetUserId(User);
-                changeRequestForm.CreateDate = DateTime.Now;
-                changeRequestForm.CreatorUserId = userID;
-                _context.Add(changeRequestForm);
-                await _context.SaveChangesAsync();
+                var model = _mapper.Map<RequestFormCreateEditViewModel, ChangeRequestForm>(requestFormCreateEditViewModel);
+                model.CreateDate = DateTime.Now;
+                model.CreatorUserId = userID;
+                _changeRequestFormRepository.Create(model);
                 return RedirectToAction(nameof(Index));
             }
-            return View(changeRequestForm);
+            return View(requestFormCreateEditViewModel);
         }
 
         // GET: ChangeRequestForms/Edit/5
@@ -89,12 +99,20 @@ namespace DocumentSystemApp.Controllers
                 return NotFound();
             }
 
-            var changeRequestForm = await _context.ChangeRequestForms.SingleOrDefaultAsync(m => m.ChangeRequestFormId == id);
+            var changeRequestForm = _changeRequestFormRepository.GetById(id.Value);
+
             if (changeRequestForm == null)
             {
                 return NotFound();
             }
-            return View(changeRequestForm);
+            var model = _mapper.Map<ChangeRequestForm, RequestFormCreateEditViewModel>(changeRequestForm);
+
+            //var changeRequestForm = await _context.ChangeRequestForms.SingleOrDefaultAsync(m => m.ChangeRequestFormId == id);
+            //if (changeRequestForm == null)
+            //{
+            //    return NotFound();
+            //}
+            return View(model);
         }
 
         // POST: ChangeRequestForms/Edit/5
@@ -102,9 +120,9 @@ namespace DocumentSystemApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ChangeRequestFormId,CompanyId,SPRS,Version,ChangeRequestID,ChangeRequestDescrpition,ChangeReason,PriorityEmergency,PriorityRoutine,PriorityNextVersion,Date,ReferenceNumber,InitiatedBy,SignatureDate,ConfigurationHardware,ConfigurationSoftware,ConfigurationSystemDocumentation,ConfigurationUserTraining,ConfigurationFirmware,ChangeType1NewRequirement,ChangeType1RequirementChange,ChangeType1DesignChange,ChangeType1Other,ChangeType1BugFixing,ChangeType2Commercial,ChangeType2Investment,ChangeType2Text,bImpactAssessmentToA,ImpactAssessmentToA,bImpactAssessmentMA,ImpactAssessmentMA,bImpactAssessmentDC,ImpactAssessmentDC,bImpactAssessmentTtE,ImpactAssessmentTtE,bImpactAssessmentOth,ImpactAssessmentOth,ChangeAccept,ChangeReject,ChangeJustification,CHARole1,CHAPrintName1,CHASignatureDate1,CHARole2,CHAPrintName2,CHASignatureDate2,CHARole3,CHAPrintName3,CHASignatureDate3,SummaryofResults,Attachments,FARole1,FAPrintName1,FASignatureDate1,FARole2,FAPrintName2,FASignatureDate2,FARole3,FAPrintName3,FASignatureDate3,CreateDate,CreatorUserId,UpdateDate,UpdaterUserId")] ChangeRequestForm changeRequestForm)
+        public async Task<IActionResult> Edit(RequestFormCreateEditViewModel requestFormCreateEditViewModel)
         {
-            if (id != changeRequestForm.ChangeRequestFormId)
+            if (requestFormCreateEditViewModel.ChangeRequestFormId == null || requestFormCreateEditViewModel.ChangeRequestFormId == 0)
             {
                 return NotFound();
             }
@@ -114,14 +132,14 @@ namespace DocumentSystemApp.Controllers
                 try
                 {
                     var userID = _userManager.GetUserId(User);
-                    changeRequestForm.UpdateDate = DateTime.Now;
-                    changeRequestForm.UpdaterUserId = userID;
-                    _context.Update(changeRequestForm);
-                    await _context.SaveChangesAsync();
+                    var model = _mapper.Map<RequestFormCreateEditViewModel, ChangeRequestForm>(requestFormCreateEditViewModel);
+                    model.CreateDate = DateTime.Now;
+                    model.CreatorUserId = userID;
+                    _changeRequestFormRepository.Update(model);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ChangeRequestFormExists(changeRequestForm.ChangeRequestFormId))
+                    if (!ChangeRequestFormExists(requestFormCreateEditViewModel.ChangeRequestFormId.Value))
                     {
                         return NotFound();
                     }
@@ -132,7 +150,7 @@ namespace DocumentSystemApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(changeRequestForm);
+            return View(requestFormCreateEditViewModel);
         }
 
         // GET: ChangeRequestForms/Delete/5
