@@ -35,11 +35,13 @@ namespace DocumentSystemApp.Models.ChangeRequestFormViewModels
         [DisplayName("Next Version")]
         public bool PriorityNextVersion { get; set; }
         [DisplayName("Date Required")]
+        [DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
         [DisplayName("Reference Number")]
         public string ReferenceNumber { get; set; }
         [DisplayName("Initiated By")]
         public string InitiatedBy { get; set; }
+        [DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy}", ApplyFormatInEditMode = true)]
         [DisplayName("Signature / Date")]
         public DateTime SignatureDate { get; set; }
 
