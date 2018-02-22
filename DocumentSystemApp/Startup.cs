@@ -31,7 +31,7 @@ namespace DocumentSystemApp
             services.AddDbContext<DocumentSystemDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<DocumentSystemDbContext>()
                 .AddDefaultTokenProviders();
 

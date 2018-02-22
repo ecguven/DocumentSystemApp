@@ -9,7 +9,7 @@ using DocumentSystemApp.Data.Entities;
 
 namespace DocumentSystemApp.Data
 {
-    public class DocumentSystemDbContext : IdentityDbContext<ApplicationUser>
+    public class DocumentSystemDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public DocumentSystemDbContext(DbContextOptions<DocumentSystemDbContext> options)
             : base(options)
